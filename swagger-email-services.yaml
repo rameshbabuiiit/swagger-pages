@@ -1,0 +1,77 @@
+openapi: 3.0.0
+info:
+  title: Email Services API
+  version: 1.0.0
+paths:
+  /emails/broadcast:
+    post:
+      summary: Send a broadcast email
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                account:
+                  type: string
+                  example: "account1"
+                subaccount:
+                  type: string
+                  example: "subaccount1"
+                from:
+                  type: string
+                  format: email
+                  example: "ramsusid@gmail.com"
+                senderName:
+                  type: string
+                  example: "Janasena News"
+                replyTo:
+                  type: string
+                  format: email
+                  example: "ramsusid@gmail.com"
+                to:
+                  type: array
+                  items:
+                    type: string
+                    format: email
+                  example: 
+                    - "success@simulator.amazonses.com"
+                    - "ramsusid@gmail.com"
+                subject:
+                  type: string
+                  example: "Test: Meeting Reminder"
+                body:
+                  type: string
+                  example: "Hello, this is a reminder for the meeting scheduled tomorrow at 10 AM. Please be on time."
+                attachments:
+                  type: array
+                  items:
+                    type: string
+                  example: 
+                    - "fileId1"
+                    - "fileId2"
+              required:
+                - account
+                - subaccount
+                - from
+                - to
+                - subject
+                - body
+      responses:
+        '202':
+          description: Accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  transactionId:
+                    type: string
+                    example: "12345"
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
