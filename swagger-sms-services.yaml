@@ -1,0 +1,4 @@
+openapi: 3.0.0
+info:
+  title: SMS Services API - coming soon
+  version: 1.0.0
